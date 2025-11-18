@@ -1,18 +1,21 @@
 import nodemailer from "nodemailer";
+
+//NOTES: Created a POST request route to handle contact form submissions and send emails via SMTP using nodemailer
 export async function POST(req) {
   try {
     const { name, email, message } = await req.json();
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "shreyamail1219@gmail.com",
-        pass: "jsmx rkly mnmn bsbx",
+        user: process.env.SMTP_MAIL, // SMTP mail being fetched for .env.local
+        pass: process.env.SMTP_PASSWORD, // SMTP mail password being fetched for .env.local
       },
     });
 
+    //NOTES: Enhanced HTML email template with better styling
     const mailOptions = {
       from: email,
-      to: "shakyasa19@gmail.com",
+      to: process.env.RECEIVER_EMAIL, // SMTP receiver mail being  fetched for .env.local
       subject: `📩 New Contact Message from ${name}`,
       html: `
     <div style="
@@ -60,6 +63,7 @@ export async function POST(req) {
       message: "Email sent successfully!",
     });
   } catch (error) {
+    // Log any errors to the server console
     console.error("Email error:", error);
     return Response.json({ success: false, error: "Failed to send email" });
   }
