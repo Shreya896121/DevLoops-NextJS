@@ -19,8 +19,7 @@ export default function ContactUs() {
     });
     const data = await res.json();
     if (data.success) {
-      alert("Message sent successfully!!!!");
-      console.log(data);
+      alert("Message sent successfully!");
       setForm({ name: "", email: "", message: "" });
     } else {
       alert("Failed to send message.");
