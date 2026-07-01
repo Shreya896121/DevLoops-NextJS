@@ -5,7 +5,7 @@ export default function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [contactInfo, setContactInfo] = useState(null);
   useEffect(() => {
-    fetch("https://api.jsonblob.com/019a968c-822f-7cba-b25a-7de5b2b074c5") 
+    fetch("https://api.jsonblob.com/019a968c-822f-7cba-b25a-7de5b2b074c5")
       .then((res) => res.json())
       .then((data) => setContactInfo(data))
       .catch((err) => console.error("Error fetching contact info:", err));
@@ -20,6 +20,7 @@ export default function ContactUs() {
     const data = await res.json();
     if (data.success) {
       alert("Message sent successfully!");
+      console.log(data);
       setForm({ name: "", email: "", message: "" });
     } else {
       alert("Failed to send message.");
