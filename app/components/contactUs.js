@@ -19,7 +19,7 @@ export default function ContactUs() {
     });
     const data = await res.json();
     if (data.success) {
-      alert("Message sent successfully!");
+      alert("Message sent successfully!!!!");
       console.log(data);
       setForm({ name: "", email: "", message: "" });
     } else {
